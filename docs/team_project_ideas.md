@@ -10,9 +10,9 @@ sentences.
 Each team member should Place an 'X' under their name to vote for the ideas 
 you like the best.
 
-| Project Idea | Description | teammate name | teammate name | teammate name | teammate name | teammate name | teammate name |
+| Project Idea | Description | Sarah | Shawn | Tri | Angela | Chris | teammate name |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| First idea | Description | | | | | | |
-| Second idea | Description | | | | | | |
+| Project Management System | create like a work order tracker that allows for changes, comments, etc? |  | | | | | |
+| To Do tracker | something that allows for people to create tasks to complete, set dates, priorities, assignments, etc.. They can set it as upcoming, in process, and done or similar | | | | | | |
 | ... | Description | | | | | | |
 | Last idea | Description | | | | | | |
