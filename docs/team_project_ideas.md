@@ -17,5 +17,5 @@ you like the best.
 | Trip Planning | Like google docs but trip planning friendly for groups. Agenda/hotel & flight info, menus/resturants. Heavily dependent on other API, MVP would have some manual entry. | | | | | | |
 | Banking Website | Like Bank of America for managing funds. | | | | | | |
 | Zoom | WebRTC video conferencing. | | | | | | |
-| ... | Description | | | | | | |
+| Social Networking | WEBRTC, profiles, posts, person to person messaging with video call capabilities and can add other callers. | | | | | | |
 | Last idea | Description | | | | | | |
