@@ -15,13 +15,14 @@ you like the best.
 |   |	- Knowledge Xfer as needed | | | | | | |
 |   |	- Working Session Thursday@4:00 p.m. CST | | | | | | |
 | 2	| Project Backlog Tool | | | | | | |
-|   |	- Notion | | | | | | |
-|   |	- Jira | | | | | | |
+|   |	- GitHub Projects | | | | | | |
 | 3	| Technical Stack (vote by adding your pref. in the cell under your name) | | | | | | |
-|   |	- BE Language | | | | | | |
-|   |	- FE Language | | | | | | |
-|   |	- FE Framework | | | | | | |
+|   |	- BE Language | Java | | | | | |
+|   |	- FE Language | JavaScript | | | | | |
+|   |	- FE Framework | React | | | | | |
+|   |	- BE Framework | SpringBoot Rest | | | | | |
 |   |	- ML Framework | | | | | | |
+|   |	- DB | SpringBoot Rest | | | | | |
 |   |	- Visualization/Graphics package (if required, e.g. D3, Nivo, etc.) | | | | | | |
 | 4	| Where to host the app? | | | | | | |
 |   |	- Heroku (suitable for FE, BE, & Postgres) | | | | | | |

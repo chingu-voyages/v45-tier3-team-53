@@ -14,5 +14,8 @@ you like the best.
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Project Management System | create like a work order tracker that allows for changes, comments, etc? |  | | | | | |
 | To Do tracker | something that allows for people to create tasks to complete, set dates, priorities, assignments, etc.. They can set it as upcoming, in process, and done or similar | | | | | | |
+| Trip Planning | Like google docs but trip planning friendly for groups. Agenda/hotel & flight info, menus/resturants. Heavily dependent on other API, MVP would have some manual entry. | | | | | | |
+| Banking Website | Like Bank of America for managing funds. | | | | | | |
+| Zoom | WebRTC video conferencing. | | | | | | |
 | ... | Description | | | | | | |
 | Last idea | Description | | | | | | |
