@@ -14,7 +14,7 @@ you like the best.
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Project Management System | create like a work order tracker that allows for changes, comments, etc? | x | x | | | x | |
 | To Do tracker | something that allows for people to create tasks to complete, set dates, priorities, assignments, etc.. They can set it as upcoming, in process, and done or similar | | | | | | |
-| Trip Planning | Like google docs but trip planning friendly for groups. Agenda/hotel & flight info, menus/resturants. Heavily dependent on other API, MVP would have some manual entry. | x | x | | |  x | |
+| CHOSEN - Trip Planning | Like google docs but trip planning friendly for groups. Agenda/hotel & flight info, menus/resturants. Heavily dependent on other API, MVP would have some manual entry. | x | x | | |  x | |
 | Banking Website | Like Bank of America for managing funds. | | | | | | |
 | Zoom | WebRTC video conferencing. | | | | | | |
 | Social Networking | WEBRTC, profiles, posts, person to person messaging with video call capabilities and can add other callers. | x | | x | | x | |
@@ -22,3 +22,31 @@ you like the best.
 | Restaurant Finder |  Finds a list of restaurants based on your food preference, your current location, foot traffic / how busy the restaurant is.| | | | | | |
 | An Animal Adoption Agency | site for rescued animals. We will have animal table, species table, adopter table, adoption application table etc. We will get to practice on those relationships in sql db. Many views could generate from it. Those views can help the agency's daily tasks. If we have time we can incorporate a map to see which area has more pets to adopt. If free db and hosting are possible, we can ultimately give this app to some nonprofit organizations.  | | | x | | | |
 | pet animal office managing app | an app to help the vet office to manage appointments, customers, their pets etc. We could have role in the auth, the app can have admin view, employee view, customer view. If time permits, a google calendar like clone can input each appointment will be great. | | | | | | |
+
+
+Possible Project Names
+
+RouteRoamer
+WanderWay
+TravelTrek
+JourneyJoy
+RoamReady
+TrekTribe
+TripVista
+NavigateNook
+ExploreEase
+TrekScape
+WayfinderWave
+TrailTrove
+RoamRover
+OdysseyOn
+PathPulse
+VoyagerView
+RouteRadar
+TrekTide
+TrailTrekker
+JourneyGenius
+
+
+
+
