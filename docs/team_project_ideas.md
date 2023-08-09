@@ -31,7 +31,7 @@ WanderWay
 TravelTrek
 JourneyJoy
 RoamReady
-TrekTribe
+TrekTribe - 3 votes
 TripVista
 NavigateNook
 ExploreEase
@@ -39,7 +39,7 @@ TrekScape
 WayfinderWave
 TrailTrove
 RoamRover
-OdysseyOn
+OdysseyOn - 1 vote
 PathPulse
 VoyagerView
 RouteRadar
