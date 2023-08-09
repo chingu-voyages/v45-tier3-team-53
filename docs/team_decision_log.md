@@ -22,7 +22,7 @@ you like the best.
 |   |	- FE Framework | React | | | | | |
 |   |	- BE Framework | SpringBoot Rest | | | | | |
 |   |	- ML Framework | | | | | | |
-|   |	- DB | SpringBoot Rest | | | | | |
+|   |	- DB | SQL possibly REDIS add | | | | | |
 |   |	- Visualization/Graphics package (if required, e.g. D3, Nivo, etc.) | | | | | | |
 | 4	| Where to host the app? | | | | | | |
 |   |	- Heroku (suitable for FE, BE, & Postgres) | | | | | | |
