@@ -10,6 +10,9 @@ assignees: ''
 **__Task Description__**
 Describe the task to be completed.
 
+**__Acceptance Criteria__**
+Describe the task to be completed.
+
 **__Technical Considerations__**
 Include any technical considerations including architecture (e.g. API), required libraries, etc.
 
