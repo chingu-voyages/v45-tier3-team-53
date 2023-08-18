@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import React from 'react';
 import { useReactiveVar } from "@apollo/client";
-import { BrowserRouter, Navigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { userState } from './GlobalState';
 import axios from 'axios';
 
@@ -46,7 +46,17 @@ function App() {
 
   return (
     <BrowserRouter>
-
+      <Routes>
+        <Route path="/" element={user ? <Navigate to="/:firstName/trips" /> : <LandingPage />} />
+        <Route
+          path ="/:firstName/trips"
+          element={
+            <ProtectedRoute>
+              {/* <MainTripDashboard /> */}
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </BrowserRouter>    
   )
 }
