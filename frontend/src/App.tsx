@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ReactElement } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
@@ -7,16 +7,16 @@ import { useReactiveVar } from "@apollo/client";
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { userState } from './GlobalState';
 import axios from 'axios';
+import LandingPage from './components/pages/LandingPage';
 
 axios.defaults.withCredentials = true;
 
-const ProtectedRoute = ({children}) => {
+const ProtectedRoute = ({children} : {children:ReactElement}) => {
   const user = useReactiveVar(userState);
 
   if(!user){
     return <Navigate to="/" />;
   }
-
   return children;
 }
 
@@ -28,13 +28,13 @@ function App() {
     if(!user) {
       axios
       // need get call from server
-        // .get(`http://localhost:5173/tripplanner/logInUser`)
+        .get(`http://localhost:5173/tripplanner/logInUser`)
         .then((res)=>{
           userState(res.data);
           setApiComplete(true);
         })
         .catch((err)=>{
-          log(err);
+          console.log(err);
           setApiComplete(true);
         })
     }
@@ -48,14 +48,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={user ? <Navigate to="/:firstName/trips" /> : <LandingPage />} />
-        <Route
+        {/* <Route
           path ="/:firstName/trips"
           element={
             <ProtectedRoute>
-              {/* <MainTripDashboard /> */}
+              <MainTripDashboard />
             </ProtectedRoute>
           }
-        />
+        /> */}
       </Routes>
     </BrowserRouter>    
   )
