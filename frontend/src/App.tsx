@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ReactElement } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
@@ -10,7 +10,7 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
-const ProtectedRoute = ({children}) => {
+const ProtectedRoute = ({children} :  {children: ReactElement}) => {
   const user = useReactiveVar(userState);
 
   if(!user){
@@ -28,13 +28,13 @@ function App() {
     if(!user) {
       axios
       // need get call from server
-        // .get(`http://localhost:5173/tripplanner/logInUser`)
+        .get(`http://localhost:5173/tripplanner/logInUser`)
         .then((res)=>{
           userState(res.data);
           setApiComplete(true);
         })
         .catch((err)=>{
-          log(err);
+          console.log(err);
           setApiComplete(true);
         })
     }
@@ -47,15 +47,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={user ? <Navigate to="/:firstName/trips" /> : <LandingPage />} />
-        <Route
+        {/* <Route path="/" element={user ? <Navigate to="/:firstName/trips" /> : <LandingPage />} /> */}
+        {/* <Route
           path ="/:firstName/trips"
           element={
             <ProtectedRoute>
               {/* <MainTripDashboard /> */}
-            </ProtectedRoute>
-          }
-        />
+            {/* </ProtectedRoute> */}
+          {/* } */}
+        {/* /> */}
       </Routes>
     </BrowserRouter>    
   )
