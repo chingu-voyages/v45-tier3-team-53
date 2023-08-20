@@ -19,7 +19,7 @@ import java.util.function.Function;
 public class JwtService {
     @Value("${SECRET_KEY}")
     private static final String SECRET_KEY;
-    public String extractUserEmail(String token) {
+    public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -55,8 +55,8 @@ public class JwtService {
                 .compact();
     }
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String userEmail = extractUserEmail(token);
-        return (userEmail.equals(userDetails.getUsername())) && !isTokenExpired(token);
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {
