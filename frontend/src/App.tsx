@@ -47,9 +47,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={user ? <Navigate to="/:firstName/trips" /> : <LandingPage />} />
+        <Route path="/" element={user ? <Navigate to="/trips" /> : <LandingPage />} />
         {/* <Route
-          path ="/:firstName/trips"
+          path ="/trips"
           element={
             <ProtectedRoute>
               <MainTripDashboard />
