@@ -1,4 +1,4 @@
-package com.chinguv45tier3team53.tripplannerrest.controller;
+package com.chinguv45tier3team53.tripplannerrest.controller.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +20,6 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody RegisterRequest request
     ) {
-        
+
     }
 }
