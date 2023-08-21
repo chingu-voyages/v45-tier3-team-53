@@ -38,6 +38,8 @@ const SignUpPopUp =()=>{
             password: values.password
         }
         
+        console.log("newInfo", updatedNewUser);
+
         axios
             .post(`http://localhost:8080/auth/register`, updatedNewUser)
             .then((res) => {
