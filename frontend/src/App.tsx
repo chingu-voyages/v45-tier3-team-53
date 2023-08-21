@@ -1,42 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState, ReactElement } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 import React from 'react';
+import { useReactiveVar } from "@apollo/client";
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
+import { userState } from './GlobalState';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
+
+const ProtectedRoute = ({children} :  {children: ReactElement}) => {
+  const user = useReactiveVar(userState);
+
+  if(!user){
+    return <Navigate to="/" />;
+  }
+
+  return children;
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const user = useReactiveVar(userState);
+  const [apiComplete, setApiComplete] = React.useState<boolean>(user ? true : false);
+
+  useEffect(()=> {
+    if(!user) {
+      axios
+      // need get call from server
+        .get(`http://localhost:5173/tripplanner/logInUser`)
+        .then((res)=>{
+          userState(res.data);
+          setApiComplete(true);
+        })
+        .catch((err)=>{
+          console.log(err);
+          setApiComplete(true);
+        })
+    }
+  })
+
+  if(!apiComplete) {
+    return null;
+  }
 
   return (
-    <>
-      <div>
-
-        <button
-          type="button"
-          className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-        >
-          Test Button
-        </button>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        {/* <Route path="/" element={user ? <Navigate to="/:firstName/trips" /> : <LandingPage />} /> */}
+        {/* <Route
+          path ="/:firstName/trips"
+          element={
+            <ProtectedRoute>
+              {/* <MainTripDashboard /> */}
+            {/* </ProtectedRoute> */}
+          {/* } */}
+        {/* /> */}
+      </Routes>
+    </BrowserRouter>    
   )
 }
 
