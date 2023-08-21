@@ -25,6 +25,8 @@ function App() {
   const user = useReactiveVar(userState);
   const [apiComplete, setApiComplete] = React.useState<boolean>(user ? true : false);
 
+  axios.defaults.withCredentials = true;
+
   useEffect(()=> {
     if(!user) {
       axios
