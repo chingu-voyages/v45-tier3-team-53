@@ -1,6 +1,4 @@
 import { useEffect, useState, ReactElement } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
 import React from 'react';
 import { useReactiveVar } from "@apollo/client";
@@ -8,6 +6,9 @@ import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { userState } from './GlobalState';
 import axios from 'axios';
 import LandingPage from './components/pages/LandingPage';
+import SignInPopUp from './components/popup/SignIn';
+import SignUpPopUp from './components/popup/SignUp';
+import MainTripDashboard from './components/pages/MainTripDashboard';
 
 axios.defaults.withCredentials = true;
 
@@ -27,8 +28,7 @@ function App() {
   useEffect(()=> {
     if(!user) {
       axios
-      // need get call from server
-        .get(`http://localhost:5173/tripplanner/logInUser`)
+        .get(`http://localhost:8080/dashboard-controller`)
         .then((res)=>{
           userState(res.data);
           setApiComplete(true);
@@ -47,15 +47,17 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/sign-in" element={<SignInPopUp />} />
+        <Route path="/sign-up" element={<SignUpPopUp />} />
         <Route path="/" element={user ? <Navigate to="/trips" /> : <LandingPage />} />
-        {/* <Route
+        <Route
           path ="/trips"
           element={
             <ProtectedRoute>
               <MainTripDashboard />
             </ProtectedRoute>
           }
-        /> */}
+        />
       </Routes>
     </BrowserRouter>    
   )
