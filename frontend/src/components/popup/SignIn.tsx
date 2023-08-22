@@ -26,6 +26,7 @@ const SignInPopUp = () => {
         axios
             .post(`http://localhost:8080/auth/authenticate`, values)
             .then((res) => {
+                console.log(res);
                 userState(res.data);
                 navigate(`/trips`)
                 setSubmitting(false);

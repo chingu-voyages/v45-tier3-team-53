@@ -1,15 +1,50 @@
 package com.chinguv45tier3team53.tripplannerrest.controller;
 
+import com.chinguv45tier3team53.tripplannerrest.dao.UserRepository;
+import com.chinguv45tier3team53.tripplannerrest.entity.User;
+import com.chinguv45tier3team53.tripplannerrest.service.JwtService;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/dashboard-controller")
+@RequestMapping("/dashboard")
+@RequiredArgsConstructor
 public class DashboardController {
-    @GetMapping
-    public ResponseEntity<String> sayHello() {
-        return ResponseEntity.ok("Hello from secured endpoint");
+    private final UserRepository repository;
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
+    @GetMapping("/user-info")
+    public ResponseEntity<UserInfoResponse> getUserInfo(HttpServletRequest request) {
+        final String authHeader = request.getHeader("Authorization");
+        final String jwt;
+        final String userEmail;
+        jwt = authHeader.substring(7);
+        userEmail = jwtService.extractUsername(jwt);
+        User user = repository.findByEmail(userEmail).get();
+
+        return ResponseEntity.ok(
+                UserInfoResponse.builder()
+                        .firstName(user.getFirstName())
+                        .lastName(user.getLastName())
+                        .email(user.getEmail())
+                        .build()
+        );
+    }
+
+    @GetMapping("/logged-in")
+    public ResponseEntity<Boolean> isTokenValid(HttpServletRequest request) {
+        final String authHeader = request.getHeader("Authorization");
+        final String jwt;
+        final String userEmail;
+        jwt = authHeader.substring(7);
+        userEmail = jwtService.extractUsername(jwt);
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+        return ResponseEntity.ok(jwtService.isTokenValid(jwt, userDetails));
     }
 }

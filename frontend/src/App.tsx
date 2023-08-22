@@ -23,16 +23,21 @@ const ProtectedRoute = ({children} : {children:ReactElement}) => {
 
 function App() {
   const user = useReactiveVar(userState);
-  const [apiComplete, setApiComplete] = React.useState<boolean>(user ? true : false);
+  const [apiComplete, setApiComplete] = React.useState<boolean>(true);
 
   axios.defaults.withCredentials = true;
 
   useEffect(()=> {
-    if(!user) {
+    if(user) {
+      setApiComplete(false)
       axios
-        .get(`http://localhost:8080/dashboard-controller`)
+        .get(`http://localhost:8080/dashboard/user-info`, {
+          headers: {
+            Authorization: `Bearer ${user.token}`
+          }
+        })
         .then((res)=>{
-          userState(res.data);
+          // userState(res.data);
           setApiComplete(true);
         })
         .catch((err)=>{
@@ -40,7 +45,7 @@ function App() {
           setApiComplete(true);
         })
     }
-  })
+  }, [user])
 
   if(!apiComplete) {
     return null;
