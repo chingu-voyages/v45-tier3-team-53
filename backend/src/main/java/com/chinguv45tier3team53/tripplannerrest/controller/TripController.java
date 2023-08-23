@@ -44,7 +44,7 @@ public class TripController {
          existingTrip.setEnd_date(trip.getEnd_date());
             tripService.updateTrip(existingTrip);
         }catch(IllegalArgumentException e){
-            System.out.println("Exception occurred, course not updated");
+            System.out.println("Exception occurred, trip not updated");
             throw e;
         }
         return tripService.updateTrip(trip);
