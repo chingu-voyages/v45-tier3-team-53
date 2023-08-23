@@ -35,7 +35,7 @@ public class TripServiceImpl implements TripService{
     @Override
     public Trip getTripById(Long id) {
         try {
-            return tripRepository.findById(id).get();
+            return tripRepository.findById(id);
         } catch (EntityNotFoundException ex) {
 
             throw ex;
