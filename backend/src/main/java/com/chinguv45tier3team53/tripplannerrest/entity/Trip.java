@@ -17,13 +17,13 @@ public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="user_id",nullable=false)
-    private Long user_id;
-    @Column(name="hotel_id",nullable=false)
-    private Long hotel_id;
-    @Column(name="trip_title")
+    @Column(name="userId",nullable=false)
+    private Long userId;
+    @Column(name="hotelId",nullable=false)
+    private Long hotelId;
+    @Column(name="tripTitle")
     private String title;
-    private Date start_date;
-    private Date end_date;
+    private Date startDate;
+    private Date endDate;
     private String detail;
 }

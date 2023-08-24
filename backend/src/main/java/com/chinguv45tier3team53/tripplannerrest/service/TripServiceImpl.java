@@ -3,15 +3,17 @@ package com.chinguv45tier3team53.tripplannerrest.service;
 import com.chinguv45tier3team53.tripplannerrest.entity.Trip;
 import com.chinguv45tier3team53.tripplannerrest.repository.TripRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class TripServiceImpl implements TripService{
-    @Autowired
+
     private TripRepository tripRepository;
     @Override
     public List<Trip> getAllTrips(){
@@ -33,7 +35,7 @@ public class TripServiceImpl implements TripService{
     }
 
     @Override
-    public Trip getTripById(Long id) {
+    public Optional<Trip> getTripById(Long id) {
         try {
             return tripRepository.findById(id);
         } catch (EntityNotFoundException ex) {

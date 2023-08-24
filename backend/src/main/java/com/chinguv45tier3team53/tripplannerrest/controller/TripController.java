@@ -1,10 +1,8 @@
 package com.chinguv45tier3team53.tripplannerrest.controller;
 
 import com.chinguv45tier3team53.tripplannerrest.entity.Trip;
-import com.chinguv45tier3team53.tripplannerrest.repository.TripRepository;
 import com.chinguv45tier3team53.tripplannerrest.service.TripService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +20,7 @@ public class TripController {
     }
 
     @GetMapping("/{id}")
-    public Trip getTripById(@PathVariable Long id){
+    public Optional<Trip> getTripById(@PathVariable Long id){
         return tripService.getTripById(id);
 
     }
@@ -31,26 +29,26 @@ public class TripController {
         return tripService.saveTrip(trip);
     }
 
+
     @PutMapping("/{id}")
-    public Trip updateTrip(@PathVariable Long id,@RequestBody Trip trip){
-        try{
-            Trip existingTrip = tripService.getTripById(id);
-            existingTrip.setId(id);
-            existingTrip.setTitle(trip.getTitle());
-            existingTrip.setDetail(trip.getDetail());
-            existingTrip.setUser_id(trip.getUser_id());
-            existingTrip.setHotel_id(trip.getHotel_id());
-            existingTrip.setStart_date(trip.getStart_date());
-         existingTrip.setEnd_date(trip.getEnd_date());
-            tripService.updateTrip(existingTrip);
-        }catch(IllegalArgumentException e){
-            System.out.println("Exception occurred, trip not updated");
-            throw e;
-        }
+    public Trip updateTrip(@PathVariable Long id, @RequestBody Trip trip) {
+        Optional<Trip> existingTrip= tripService.getTripById(id);
+
+        if (existingTrip!=null) {
+            existingTrip.get().setId(id);
+            existingTrip.get().setTitle(trip.getTitle());
+            existingTrip.get().setDetail(trip.getDetail());
+            existingTrip.get().setUserId(trip.getUserId());
+            existingTrip.get().setHotelId(trip.getHotelId());
+            existingTrip.get().setStartDate(trip.getStartDate());
+            existingTrip.get().setEndDate(trip.getEndDate());
+            tripService.updateTrip(existingTrip.get());}
+
         return tripService.updateTrip(trip);
     }
 
-    @DeleteMapping("/{id}")
+
+        @DeleteMapping("/{id}")
     public void deleteTrip(@PathVariable Long id){
         tripService.deleteTripById(id);
     }
