@@ -53,7 +53,6 @@ public class JwtService {
     }
 
     public String generateRefreshToken(
-            Map<String, Object> extraClaims,
             UserDetails userDetails
     ) {
         return buildToken(new HashMap<>(), userDetails, refreshExpiration);
