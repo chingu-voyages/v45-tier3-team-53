@@ -17,10 +17,6 @@ public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="userId",nullable=false)
-    private Long userId;
-    @Column(name="hotelId",nullable=false)
-    private Long hotelId;
     @Column(name="tripTitle")
     private String title;
     private Date startDate;

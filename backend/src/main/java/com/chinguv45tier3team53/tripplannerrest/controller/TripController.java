@@ -3,6 +3,7 @@ package com.chinguv45tier3team53.tripplannerrest.controller;
 import com.chinguv45tier3team53.tripplannerrest.entity.Trip;
 import com.chinguv45tier3team53.tripplannerrest.service.TripService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,37 +21,33 @@ public class TripController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Trip> getTripById(@PathVariable Long id){
-        return tripService.getTripById(id);
-
+    public ResponseEntity<Trip> getTripById(@PathVariable Long id) {
+        return tripService.getTripById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+
     @PostMapping
     public Trip createTrip(@RequestBody Trip trip){
-        return tripService.saveTrip(trip);
+        return tripService.createTrip(trip);
     }
 
 
     @PutMapping("/{id}")
-    public Trip updateTrip(@PathVariable Long id, @RequestBody Trip trip) {
-        Optional<Trip> existingTrip= tripService.getTripById(id);
-
-        if (existingTrip!=null) {
-            existingTrip.get().setId(id);
-            existingTrip.get().setTitle(trip.getTitle());
-            existingTrip.get().setDetail(trip.getDetail());
-            existingTrip.get().setUserId(trip.getUserId());
-            existingTrip.get().setHotelId(trip.getHotelId());
-            existingTrip.get().setStartDate(trip.getStartDate());
-            existingTrip.get().setEndDate(trip.getEndDate());
-            tripService.updateTrip(existingTrip.get());}
-
-        return tripService.updateTrip(trip);
+    public ResponseEntity<Trip> updateTrip(@PathVariable Long id, @RequestBody Trip trip) {
+        Trip updatedTrip = tripService.updateTrip(id, trip);
+        if (updatedTrip != null) {
+            return ResponseEntity.ok(updatedTrip);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 
-        @DeleteMapping("/{id}")
+
+    @DeleteMapping("/{id}")
     public void deleteTrip(@PathVariable Long id){
-        tripService.deleteTripById(id);
+        tripService.deleteTrip(id);
     }
 }
 
