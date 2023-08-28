@@ -14,4 +14,4 @@ function App() {
   return <NewTripForm />;
 }
 
-export default App;
+export default App
