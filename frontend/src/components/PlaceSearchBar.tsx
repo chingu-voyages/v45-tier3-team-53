@@ -23,7 +23,7 @@ const Places = () => {
     }
 
     return (
-        <div className="w-full">
+        <div className="relative w-full">
             <Combobox value={value} onChange={handleSelect}>
                 <div className="flex items-center rounded-lg p-1 justify-start focus-within:outline-black w-full">
                     <div className="mr-1">
