@@ -1,5 +1,6 @@
-package com.chinguv45tier3team53.tripplannerrest.security;
+package com.chinguv45tier3team53.tripplannerrest.config;
 
+import com.chinguv45tier3team53.tripplannerrest.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.chinguv45tier3team53.tripplannerrest;
+package com.chinguv45tier3team53.tripplannerrest.config;
 
 import com.chinguv45tier3team53.tripplannerrest.dao.UserRepository;
 import lombok.RequiredArgsConstructor;
