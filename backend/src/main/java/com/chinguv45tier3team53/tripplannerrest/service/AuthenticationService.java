@@ -1,8 +1,8 @@
 package com.chinguv45tier3team53.tripplannerrest.service;
 
-import com.chinguv45tier3team53.tripplannerrest.controller.auth.AuthenticationRequest;
-import com.chinguv45tier3team53.tripplannerrest.controller.auth.AuthenticationResponse;
-import com.chinguv45tier3team53.tripplannerrest.controller.auth.RegisterRequest;
+import com.chinguv45tier3team53.tripplannerrest.dto.AuthenticationRequest;
+import com.chinguv45tier3team53.tripplannerrest.dto.AuthenticationResponse;
+import com.chinguv45tier3team53.tripplannerrest.dto.RegisterRequest;
 import com.chinguv45tier3team53.tripplannerrest.dao.TokenRepository;
 import com.chinguv45tier3team53.tripplannerrest.dao.UserRepository;
 import com.chinguv45tier3team53.tripplannerrest.entity.Role;

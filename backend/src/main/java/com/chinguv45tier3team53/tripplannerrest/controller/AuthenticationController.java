@@ -1,5 +1,8 @@
-package com.chinguv45tier3team53.tripplannerrest.controller.auth;
+package com.chinguv45tier3team53.tripplannerrest.controller;
 
+import com.chinguv45tier3team53.tripplannerrest.dto.AuthenticationRequest;
+import com.chinguv45tier3team53.tripplannerrest.dto.AuthenticationResponse;
+import com.chinguv45tier3team53.tripplannerrest.dto.RegisterRequest;
 import com.chinguv45tier3team53.tripplannerrest.service.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
