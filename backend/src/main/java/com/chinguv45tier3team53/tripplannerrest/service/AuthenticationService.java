@@ -1,10 +1,9 @@
 package com.chinguv45tier3team53.tripplannerrest.service;
 
+import com.chinguv45tier3team53.tripplannerrest.dao.TokenRepository;
 import com.chinguv45tier3team53.tripplannerrest.dto.AuthenticationRequest;
 import com.chinguv45tier3team53.tripplannerrest.dto.AuthenticationResponse;
 import com.chinguv45tier3team53.tripplannerrest.dto.RegisterRequest;
-import com.chinguv45tier3team53.tripplannerrest.dao.TokenRepository;
-import com.chinguv45tier3team53.tripplannerrest.dao.UserRepository;
 import com.chinguv45tier3team53.tripplannerrest.entity.Role;
 import com.chinguv45tier3team53.tripplannerrest.entity.Token;
 import com.chinguv45tier3team53.tripplannerrest.entity.TokenType;
@@ -25,7 +24,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UserRepository repository;
+    private final UserService service;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -38,7 +37,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        User savedUser = repository.save(user);
+        User savedUser = service.save(user);
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
@@ -57,7 +56,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        User user = repository.findByEmail(request.getEmail())
+        User user = service.findByEmail(request.getEmail())
                 .orElseThrow();
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
@@ -103,7 +102,7 @@ public class AuthenticationService {
         refreshToken = authHeader.substring(7);
         userEmail = jwtService.extractUsername(refreshToken);
         if (userEmail != null) {
-            User user = this.repository.findByEmail(userEmail).orElseThrow();
+            User user = this.service.findByEmail(userEmail).orElseThrow();
             if (jwtService.isTokenValid(refreshToken, user)) {
                 String accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);

@@ -1,8 +1,8 @@
 package com.chinguv45tier3team53.tripplannerrest.controller;
 
-import com.chinguv45tier3team53.tripplannerrest.dao.UserRepository;
 import com.chinguv45tier3team53.tripplannerrest.entity.User;
 import com.chinguv45tier3team53.tripplannerrest.service.JwtService;
+import com.chinguv45tier3team53.tripplannerrest.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/dashboard")
 @RequiredArgsConstructor
 public class DashboardController {
-    private final UserRepository repository;
+    private final UserService service;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
     @GetMapping("/user-info")
@@ -26,7 +26,7 @@ public class DashboardController {
         final String userEmail;
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUsername(jwt);
-        User user = repository.findByEmail(userEmail).get();
+        User user = service.findByEmail(userEmail).get();
 
         return ResponseEntity.ok(
                 UserInfoResponse.builder()
