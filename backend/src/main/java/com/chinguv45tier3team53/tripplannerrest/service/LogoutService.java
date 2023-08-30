@@ -1,6 +1,7 @@
 package com.chinguv45tier3team53.tripplannerrest.service;
 
 import com.chinguv45tier3team53.tripplannerrest.dao.TokenRepository;
+import com.chinguv45tier3team53.tripplannerrest.entity.Token;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class LogoutService implements LogoutHandler {
             return;
         }
         jwt = authHeader.substring(7);
-        var storedToken = tokenRepository.findByToken(jwt).orElse(null);
+        Token storedToken = tokenRepository.findByToken(jwt).orElse(null);
         if(storedToken != null) {
             storedToken.setExpired(true);
             storedToken.setRevoked(true);
