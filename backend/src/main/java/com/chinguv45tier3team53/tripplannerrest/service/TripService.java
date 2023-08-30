@@ -1,4 +1,5 @@
 package com.chinguv45tier3team53.tripplannerrest.service;
+
 import com.chinguv45tier3team53.tripplannerrest.entity.Trip;
 import com.chinguv45tier3team53.tripplannerrest.repository.TripRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -6,28 +7,33 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 @Data
-public class TripService{
+public class TripService {
+
     private TripRepository tripRepository;
-    public List<Trip> getAllTrips(){
-        try{
+
+    public List<Trip> getAllTrips() {
+        try {
             return tripRepository.findAll();
-        }catch (DataAccessException ex) {
+        } catch (DataAccessException ex) {
             throw ex;
         }
     }
+
     public Trip createTrip(Trip trip) {
-        try{
+        try {
             return tripRepository.save(trip);
-        }catch(DataAccessException ex){
+        } catch (DataAccessException ex) {
             throw ex;
         }
     }
+
     public Trip getTripById(Long id) {
         Optional<Trip> tripOptional = tripRepository.findById(id);
         if (tripOptional.isPresent()) {
@@ -36,6 +42,7 @@ public class TripService{
             throw new EntityNotFoundException("Trip with ID " + id + " not found.");
         }
     }
+
     public Trip updateTrip(Long id, Trip trip) {
         Optional<Trip> existingTripOptional = tripRepository.findById(id);
         if (existingTripOptional.isPresent()) {
@@ -45,10 +52,11 @@ public class TripService{
             throw new EntityNotFoundException("Trip with ID " + id + " not found.");
         }
     }
+
     public void deleteTrip(Long id) {
-        try{
+        try {
             tripRepository.deleteById(id);
-        }catch (EntityNotFoundException ex) {
+        } catch (EntityNotFoundException ex) {
             throw ex;
         }
     }
