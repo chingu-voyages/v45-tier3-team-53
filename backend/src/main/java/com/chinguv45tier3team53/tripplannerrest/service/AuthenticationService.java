@@ -1,12 +1,9 @@
 package com.chinguv45tier3team53.tripplannerrest.service;
 
-import com.chinguv45tier3team53.tripplannerrest.dao.TokenRepository;
 import com.chinguv45tier3team53.tripplannerrest.dto.AuthenticationRequest;
 import com.chinguv45tier3team53.tripplannerrest.dto.AuthenticationResponse;
 import com.chinguv45tier3team53.tripplannerrest.dto.RegisterRequest;
 import com.chinguv45tier3team53.tripplannerrest.entity.Role;
-import com.chinguv45tier3team53.tripplannerrest.entity.Token;
-import com.chinguv45tier3team53.tripplannerrest.entity.TokenType;
 import com.chinguv45tier3team53.tripplannerrest.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,13 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final UserService service;
-    private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -37,10 +32,9 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        User savedUser = service.save(user);
+        service.save(user);
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
-        saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
@@ -60,33 +54,10 @@ public class AuthenticationService {
                 .orElseThrow();
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
-        revokeAllUserTokens(user);
-        saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
-    }
-
-    private void revokeAllUserTokens(User user) {
-        List<Token> validUserTokens = tokenRepository.findAllValidTokensByUser(user.getId());
-        if(validUserTokens.isEmpty()) return;
-        validUserTokens.forEach(t -> {
-            t.setExpired(true);
-            t.setRevoked(true);
-        });
-        tokenRepository.saveAll(validUserTokens);
-    }
-
-    private void saveUserToken(User user, String jwtToken) {
-        Token token = Token.builder()
-                .user(user)
-                .token(jwtToken)
-                .tokenType(TokenType.BEARER)
-                .revoked(false)
-                .expired(false)
-                .build();
-        tokenRepository.save(token);
     }
 
     public void refreshToken(
@@ -105,8 +76,6 @@ public class AuthenticationService {
             User user = this.service.findByEmail(userEmail).orElseThrow();
             if (jwtService.isTokenValid(refreshToken, user)) {
                 String accessToken = jwtService.generateToken(user);
-                revokeAllUserTokens(user);
-                saveUserToken(user, accessToken);
                 AuthenticationResponse authResponse = AuthenticationResponse.builder()
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
