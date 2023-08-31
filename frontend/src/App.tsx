@@ -33,7 +33,7 @@ function App() {
       axios
         .get(`http://localhost:8080/dashboard/user-info`, {
           headers: {
-            Authorization: `Bearer ${user.token}`
+            Authorization: `Bearer ${user.accessToken}`
           }
         })
         .then((res)=>{
