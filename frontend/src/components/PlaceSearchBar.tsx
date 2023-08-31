@@ -1,8 +1,13 @@
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
+import usePlacesAutocomplete, { getGeocode } from "use-places-autocomplete";
 import { Combobox } from "@headlessui/react";
+import LatLngLiteral = google.maps.LatLngLiteral;
+
+interface Destination {
+  coordinate: LatLngLiteral;
+  name: string;
+  neBound: LatLngLiteral;
+  swBound: LatLngLiteral;
+}
 
 const Places = () => {
   const {
@@ -16,9 +21,14 @@ const Places = () => {
     setValue(address, false);
     clearSuggestions();
     const results = await getGeocode({ address });
-    const { lat, lng } = getLatLng(results[0]);
-    console.log({ lat: lat, lng: lng });
-    console.log(results[0]);
+    const result = results[0];
+    const destination: Destination = {
+      coordinate: result.geometry.location.toJSON(),
+      name: result.address_components[0].long_name,
+      neBound: result.geometry.viewport.getNorthEast().toJSON(),
+      swBound: result.geometry.viewport.getSouthWest().toJSON(),
+    };
+    console.log(destination);
   };
 
   return (
