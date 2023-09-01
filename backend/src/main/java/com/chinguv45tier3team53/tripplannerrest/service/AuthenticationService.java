@@ -24,6 +24,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
     public AuthenticationResponse register(RegisterRequest request) {
         User user = User.builder()
                 .firstName(request.getFirstName())
@@ -40,8 +41,6 @@ public class AuthenticationService {
                 .refreshToken(refreshToken)
                 .build();
     }
-
-
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
@@ -67,7 +66,7 @@ public class AuthenticationService {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String userEmail;
-        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
         refreshToken = authHeader.substring(7);

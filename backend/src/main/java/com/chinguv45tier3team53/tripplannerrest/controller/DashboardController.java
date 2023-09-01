@@ -19,6 +19,7 @@ public class DashboardController {
     private final UserService service;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+
     @GetMapping("/user-info")
     public ResponseEntity<UserInfoResponse> getUserInfo(HttpServletRequest request) {
         final String authHeader = request.getHeader("Authorization");
