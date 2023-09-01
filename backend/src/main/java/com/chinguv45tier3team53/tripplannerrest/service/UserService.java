@@ -10,10 +10,11 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository repository;
 
-    public Optional<User> findByEmail(String email) {
-        return repository.findByEmail(email);
+    public User findByEmail(String email) {
+        return repository.findByEmail(email).orElseThrow();
     }
 
     public User save(User user) {

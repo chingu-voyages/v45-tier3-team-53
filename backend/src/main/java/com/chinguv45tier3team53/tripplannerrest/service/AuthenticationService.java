@@ -20,7 +20,8 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UserService service;
+
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -33,7 +34,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        service.save(user);
+        userService.save(user);
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
         return AuthenticationResponse.builder()
@@ -49,8 +50,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        User user = service.findByEmail(request.getEmail())
-                .orElseThrow();
+        User user = userService.findByEmail(request.getEmail());
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
         return AuthenticationResponse.builder()
@@ -72,7 +72,7 @@ public class AuthenticationService {
         refreshToken = authHeader.substring(7);
         userEmail = jwtService.extractUsername(refreshToken);
         if (userEmail != null) {
-            User user = this.service.findByEmail(userEmail).orElseThrow();
+            User user = userService.findByEmail(userEmail);
             if (jwtService.isTokenValid(refreshToken, user)) {
                 String accessToken = jwtService.generateToken(user);
                 AuthenticationResponse authResponse = AuthenticationResponse.builder()

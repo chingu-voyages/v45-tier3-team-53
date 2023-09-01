@@ -1,4 +1,4 @@
-package com.chinguv45tier3team53.tripplannerrest.controller;
+package com.chinguv45tier3team53.tripplannerrest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

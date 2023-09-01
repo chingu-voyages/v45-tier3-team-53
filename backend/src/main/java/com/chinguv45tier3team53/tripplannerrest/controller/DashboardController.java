@@ -1,5 +1,6 @@
 package com.chinguv45tier3team53.tripplannerrest.controller;
 
+import com.chinguv45tier3team53.tripplannerrest.dto.UserInfoResponse;
 import com.chinguv45tier3team53.tripplannerrest.entity.User;
 import com.chinguv45tier3team53.tripplannerrest.service.JwtService;
 import com.chinguv45tier3team53.tripplannerrest.service.UserService;
@@ -13,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/dashboard")
 @RequiredArgsConstructor
+@RequestMapping("/api/dashboard")
 public class DashboardController {
-    private final UserService service;
+
+    private final UserService userService;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
@@ -27,7 +29,7 @@ public class DashboardController {
         final String userEmail;
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUsername(jwt);
-        User user = service.findByEmail(userEmail).get();
+        User user = userService.findByEmail(userEmail);
 
         return ResponseEntity.ok(
                 UserInfoResponse.builder()
