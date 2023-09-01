@@ -23,4 +23,7 @@ public class Trip {
     private Date startDate;
     private Date endDate;
     private String detail;
+    @ManyToOne
+    @JoinColumn(name = "destination_id")
+    private Destination destination;
 }
