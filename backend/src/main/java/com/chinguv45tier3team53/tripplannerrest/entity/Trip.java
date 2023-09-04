@@ -24,8 +24,7 @@ public class Trip {
     private Date startDate;
     private Date endDate;
     private String detail;
-
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="trips_id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "trips_id")
     private List<Transportation> transportationList;
 }
