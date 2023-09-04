@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,4 +24,8 @@ public class Trip {
     private Date startDate;
     private Date endDate;
     private String detail;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="trips_id")
+    private List<Transportation> transportationList;
 }
