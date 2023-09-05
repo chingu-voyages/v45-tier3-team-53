@@ -34,8 +34,7 @@ public class TransportationController {
 
         return addedTransportation;
     }
-
-
+    
     @PutMapping("/list")
     public Transportation updateTransportation(@RequestBody Transportation transportation) {
         Transportation updatedTransportation = service.save(transportation);
