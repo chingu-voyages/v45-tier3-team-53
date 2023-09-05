@@ -17,24 +17,24 @@ public class TransportationService {
         return repository.findAll();
     }
 
-    public Transportation findById(int theId) {
-        Optional<Transportation> result = repository.findById(theId);
+    public Transportation findById(long id) {
+        Optional<Transportation> result = repository.findById(id);
 
         Transportation transportation = null;
         if (result.isPresent()) {
             transportation = result.get();
         } else {
-            throw new RuntimeException("Did not find openIdUser id - " + theId);
+            throw new RuntimeException("Did not find Transportation id - " + id);
         }
 
         return transportation;
     }
 
-    public void save(Transportation transportation) {
-        repository.save(transportation);
+    public Transportation save(Transportation transportation) {
+        return repository.save(transportation);
     }
 
-    public void deleteById(int theId) {
-        repository.deleteById(theId);
+    public void deleteById(long id) {
+        repository.deleteById(id);
     }
 }
