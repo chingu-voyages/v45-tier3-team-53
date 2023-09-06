@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import DatePicker from "react-datepicker";
+import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
+import {  useNavigate } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
 
 export const NewTripForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [fromDate, setFromDate] = useState<Date | null>(null);
   const [toDate, setToDate] = useState<Date | null>(null);
+  const navigate = useNavigate();
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -27,7 +29,7 @@ export const NewTripForm = () => {
 
   const handleSubmit = () => {
     setIsOpen(false);
-    // navigate to trip planning page
+    navigate("/planner");
     // send request to back end
   };
 
