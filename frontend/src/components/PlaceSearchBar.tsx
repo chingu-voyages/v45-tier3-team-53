@@ -2,7 +2,7 @@ import usePlacesAutocomplete, { getGeocode } from "use-places-autocomplete";
 import { Combobox } from "@headlessui/react";
 import LatLngLiteral = google.maps.LatLngLiteral;
 
-interface Destination {
+export interface Location {
   coordinate: LatLngLiteral;
   name: string;
   neBound: LatLngLiteral;
@@ -22,7 +22,7 @@ const Places = () => {
     clearSuggestions();
     const results = await getGeocode({ address });
     const result = results[0];
-    const destination: Destination = {
+    const destination: Location = {
       coordinate: result.geometry.location.toJSON(),
       name: result.address_components[0].long_name,
       neBound: result.geometry.viewport.getNorthEast().toJSON(),

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import DatePicker from "react-datepicker";
+import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
 
 export const NewTripForm = () => {
   const [isOpen, setIsOpen] = useState(false);
