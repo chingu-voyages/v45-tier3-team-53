@@ -1,34 +1,40 @@
-import {GoogleMap} from "@react-google-maps/api";
-import {Location} from "./PlaceSearchBar.tsx";
-import LatLngBounds = google.maps.LatLngBounds;
+import { GoogleMap } from "@react-google-maps/api";
+import LatLngBoundsLiteral = google.maps.LatLngBoundsLiteral;
+import { useAppSelector } from "../hooks.ts";
 
-interface MapProp {
-    destination: Location;
-}
-
-export const GoogleMapContainer = ({destination}: MapProp) => {
-    if (localStorage.getItem("isLoaded") === "false") {
-        return <div>loading...</div>;
-    }
-    return <Map destination={destination}/>;
+export const GoogleMapContainer = () => {
+  if (localStorage.getItem("isLoaded") === "false") {
+    return <div>loading...</div>;
+  }
+  return <Map />;
 };
 
-const Map = ({destination}: MapProp) => {
-    const start = {
-        lat: destination.coordinate.lat,
-        lng: destination.coordinate.lng,
+const Map = () => {
+  const destination = useAppSelector((state) => state.trip.destination);
+  const start = {
+    lat: destination.coordinate.lat,
+    lng: destination.coordinate.lng,
+  };
+  const onLoad = (map: google.maps.Map) => {
+    const bounds: LatLngBoundsLiteral = {
+      east: destination.neBound.lng,
+      north: destination.neBound.lat,
+      west: destination.swBound.lng,
+      south: destination.swBound.lat,
     };
-    const onLoad = (map: google.maps.Map) => {
-        const bounds: LatLngBounds = new LatLngBounds(destination.swBound, destination.neBound);
-        map.fitBounds(bounds);
-    }
-    const containerStyle = {
-        width: "100%",
-        height: "100vh",
-    };
-    return (
-        <GoogleMap center={start} mapContainerStyle={containerStyle} onLoad={onLoad}>
-            <></>
-        </GoogleMap>
-    );
+    map.fitBounds(bounds);
+  };
+  const containerStyle = {
+    width: "100%",
+    height: "100vh",
+  };
+  return (
+    <GoogleMap
+      center={start}
+      mapContainerStyle={containerStyle}
+      onLoad={onLoad}
+    >
+      <></>
+    </GoogleMap>
+  );
 };
