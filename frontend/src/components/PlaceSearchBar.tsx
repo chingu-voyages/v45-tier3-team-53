@@ -2,6 +2,7 @@ import usePlacesAutocomplete, { getGeocode } from "use-places-autocomplete";
 import { Combobox } from "@headlessui/react";
 import LatLngLiteral = google.maps.LatLngLiteral;
 import { setDestination } from "../store/tripReducer.ts";
+import { useAppDispatch } from "../hooks.ts";
 
 export interface Location {
   coordinate: LatLngLiteral;
@@ -11,6 +12,7 @@ export interface Location {
 }
 
 const Places = () => {
+  const dispatch = useAppDispatch();
   const {
     value,
     setValue,
@@ -29,7 +31,7 @@ const Places = () => {
       neBound: result.geometry.viewport.getNorthEast().toJSON(),
       swBound: result.geometry.viewport.getSouthWest().toJSON(),
     };
-    setDestination(destination);
+    dispatch(setDestination(destination));
   };
 
   return (
