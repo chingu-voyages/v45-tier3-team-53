@@ -22,9 +22,9 @@ public class Transportation {
     @Column(name = "mode")
     private String mode;
     @Column(name = "orign")
-    private String orign;
+    private Location orign;
     @Column(name = "destination")
-    private String destination;
+    private Location destination;
     @Column(name = "start")
     private Date start;
     @Column(name = "end")
