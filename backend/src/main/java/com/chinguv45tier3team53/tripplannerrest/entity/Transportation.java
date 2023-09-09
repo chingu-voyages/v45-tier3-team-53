@@ -21,8 +21,28 @@ public class Transportation {
     private Long id;
     @Column(name = "mode")
     private String mode;
-    @Column(name = "orign")
-    private Location orign;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride( name = "name", column = @Column(name = "ori_name")),
+            @AttributeOverride( name = "coordinate.longitude", column = @Column(name = "ori_co_lo")),
+            @AttributeOverride( name = "coordinate.latitude", column = @Column(name = "ori_co_la")),
+            @AttributeOverride( name = "swBound.longitude", column = @Column(name = "ori_sw_lo")),
+            @AttributeOverride( name = "swBound.latitude", column = @Column(name = "ori_sw_la")),
+            @AttributeOverride( name = "neBound.longitude", column = @Column(name = "ori_ne_lo")),
+            @AttributeOverride( name = "neBound.latitude", column = @Column(name = "ori_ne_la"))
+    })
+    @Column(name = "origin")
+    private Location origin;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride( name = "name", column = @Column(name = "des_name")),
+            @AttributeOverride( name = "coordinate.longitude", column = @Column(name = "des_co_lo")),
+            @AttributeOverride( name = "coordinate.latitude", column = @Column(name = "des_co_la")),
+            @AttributeOverride( name = "swBound.longitude", column = @Column(name = "des_sw_lo")),
+            @AttributeOverride( name = "swBound.latitude", column = @Column(name = "des_sw_la")),
+            @AttributeOverride( name = "neBound.longitude", column = @Column(name = "des_ne_lo")),
+            @AttributeOverride( name = "neBound.latitude", column = @Column(name = "des_ne_la"))
+    })
     @Column(name = "destination")
     private Location destination;
     @Column(name = "start")
