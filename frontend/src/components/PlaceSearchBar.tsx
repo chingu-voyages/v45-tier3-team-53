@@ -2,7 +2,7 @@ import usePlacesAutocomplete, { getGeocode } from "use-places-autocomplete";
 import { Combobox } from "@headlessui/react";
 import LatLngLiteral = google.maps.LatLngLiteral;
 import { setDestination } from "../store/tripReducer.ts";
-import { useAppDispatch } from "../hooks.ts";
+import { useAppDispatch, useAppSelector } from "../hooks.ts";
 
 export interface Location {
   coordinate: LatLngLiteral;
@@ -35,7 +35,8 @@ const Places = () => {
   };
 
   return (
-    <div className="relative w-full">
+    // could make the className conditional, so it can be reusable and doesn't highlight in other places
+    <div className="relative w-full rounded-md focus-within:ring focus-within:ring-amber-300">
       <Combobox value={value} onChange={handleSelect}>
         <div className="flex items-center rounded-lg p-1 justify-start focus-within:outline-black w-full">
           <div className="mr-1">
@@ -87,7 +88,7 @@ const Places = () => {
 };
 
 export const PlaceSearchBar = () => {
-  if (localStorage.getItem("isLoaded") === "false")
-    return <div>loading...</div>;
+  const isLoaded = useAppSelector((state) => state.api.isLoaded);
+  if (!isLoaded) return <div>loading...</div>;
   return <Places />;
 };
