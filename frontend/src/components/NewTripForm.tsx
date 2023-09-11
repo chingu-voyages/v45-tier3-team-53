@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import DatePicker from "react-datepicker";
 import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../hooks.ts";
+import { setDates } from "../store/tripReducer.ts";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -11,6 +13,7 @@ export const NewTripForm = () => {
   const [fromDate, setFromDate] = useState<Date | null>(null);
   const [toDate, setToDate] = useState<Date | null>(null);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -28,7 +31,9 @@ export const NewTripForm = () => {
   };
 
   const handleSubmit = () => {
+    // handle validation
     setIsOpen(false);
+    dispatch(setDates({ from: fromDate!, to: toDate! }));
     navigate("/planner");
     // send request to back end
   };

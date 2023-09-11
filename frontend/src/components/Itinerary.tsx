@@ -12,6 +12,7 @@ const TitleCard = () => {
   const destination = useAppSelector((state) => state.trip.destination.name);
   return <div>Trip to {destination}</div>;
 };
+
 export const Itinerary = () => {
   return (
     <>
