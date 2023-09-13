@@ -27,4 +27,7 @@ public class Trip {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "trips_id")
     private List<Transportation> transportationList;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "trips_id")
+    private List<Hotel> hotelList;
 }
