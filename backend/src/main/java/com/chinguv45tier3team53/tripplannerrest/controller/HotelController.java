@@ -2,6 +2,7 @@ package com.chinguv45tier3team53.tripplannerrest.controller;
 
 import com.chinguv45tier3team53.tripplannerrest.entity.Hotel;
 import com.chinguv45tier3team53.tripplannerrest.service.HotelService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class HotelController {
     public ResponseEntity<Hotel> getHotel(@PathVariable long id) {
         try {
             return ResponseEntity.ok(service.findById(id));
-        } catch (RuntimeException e) {
+        } catch (EntityNotFoundException e) {
             System.out.println(e);
             return ResponseEntity.notFound().build();
         }
@@ -48,7 +49,7 @@ public class HotelController {
     public ResponseEntity<Void> deleteHotel(@PathVariable long id) {
         try {
             Hotel tempHotel = service.findById(id);
-        } catch (RuntimeException e) {
+        } catch (EntityNotFoundException e) {
             System.out.println(e);
             return ResponseEntity.notFound().build();
         }
