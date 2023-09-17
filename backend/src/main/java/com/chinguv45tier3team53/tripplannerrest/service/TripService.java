@@ -2,6 +2,8 @@ package com.chinguv45tier3team53.tripplannerrest.service;
 
 import com.chinguv45tier3team53.tripplannerrest.entity.Trip;
 import com.chinguv45tier3team53.tripplannerrest.repository.TripRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -59,5 +61,10 @@ public class TripService {
         } catch (EntityNotFoundException ex) {
             throw ex;
         }
+    }
+
+    public <T> T convertJSON(ObjectNode input, String fieldName, Class<T> returnType) {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.convertValue(input.get(fieldName), returnType);
     }
 }
