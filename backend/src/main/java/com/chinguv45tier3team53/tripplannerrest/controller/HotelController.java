@@ -4,7 +4,6 @@ import com.chinguv45tier3team53.tripplannerrest.entity.Hotel;
 import com.chinguv45tier3team53.tripplannerrest.entity.Trip;
 import com.chinguv45tier3team53.tripplannerrest.service.HotelService;
 import com.chinguv45tier3team53.tripplannerrest.service.TripService;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,11 +19,9 @@ public class HotelController {
     private final HotelService service;
     private final TripService tripService;
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Hotel>> getHotelListForTrip(@RequestBody ObjectNode input) {
-        Trip existingTrip = tripService.getTripById(
-                tripService.convertJSON(input, "tripId", Long.class)
-        );
+    @GetMapping("/trip/{id}")
+    public ResponseEntity<List<Hotel>> getHotelListForTrip(@PathVariable long id) {
+        Trip existingTrip = tripService.getTripById(id);
 
         return ResponseEntity.ok(existingTrip.getHotelList());
     }
@@ -39,13 +36,9 @@ public class HotelController {
         }
     }
 
-    @PostMapping("/list")
-    public ResponseEntity<Hotel> addHotelToTrip(@RequestBody ObjectNode input) {
-        Trip existingTrip = tripService.getTripById(
-                tripService.convertJSON(input, "tripId", Long.class)
-        );
-        Hotel hotel = tripService.convertJSON(input, "hotel", Hotel.class);
-
+    @PostMapping("/trip/{id}")
+    public ResponseEntity<Hotel> addHotelToTrip(@PathVariable long id, @RequestBody Hotel hotel) {
+        Trip existingTrip = tripService.getTripById(id);
         existingTrip.addHotel(hotel);
         Hotel addedHotel = service.save(hotel);
 
