@@ -1,7 +1,9 @@
 package com.chinguv45tier3team53.tripplannerrest.controller;
 
 import com.chinguv45tier3team53.tripplannerrest.entity.Hotel;
+import com.chinguv45tier3team53.tripplannerrest.entity.Trip;
 import com.chinguv45tier3team53.tripplannerrest.service.HotelService;
+import com.chinguv45tier3team53.tripplannerrest.service.TripService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,10 +17,13 @@ import java.util.List;
 @RequestMapping("/api/hotel")
 public class HotelController {
     private final HotelService service;
+    private final TripService tripService;
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Hotel>> getHotelList() {
-        return ResponseEntity.ok(service.findAll());
+    @GetMapping("/trip/{id}")
+    public ResponseEntity<List<Hotel>> getHotelListForTrip(@PathVariable long id) {
+        Trip existingTrip = tripService.getTripById(id);
+
+        return ResponseEntity.ok(existingTrip.getHotelList());
     }
 
     @GetMapping("/list/{id}")
@@ -31,8 +36,10 @@ public class HotelController {
         }
     }
 
-    @PostMapping("/list")
-    public ResponseEntity<Hotel> addHotel(@RequestBody Hotel hotel) {
+    @PostMapping("/trip/{id}")
+    public ResponseEntity<Hotel> addHotelToTrip(@PathVariable long id, @RequestBody Hotel hotel) {
+        Trip existingTrip = tripService.getTripById(id);
+        existingTrip.addHotel(hotel);
         Hotel addedHotel = service.save(hotel);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(addedHotel);

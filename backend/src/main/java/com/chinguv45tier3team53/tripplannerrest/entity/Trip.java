@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,4 +31,11 @@ public class Trip {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "trips_id")
     private List<Hotel> hotelList;
+
+    public void addHotel(Hotel hotel) {
+        if (hotelList == null) {
+            hotelList = new ArrayList<>();
+        }
+        hotelList.add(hotel);
+    }
 }
