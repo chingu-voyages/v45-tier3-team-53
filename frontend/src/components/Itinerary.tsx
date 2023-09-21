@@ -1,5 +1,6 @@
 import { Tab } from "@headlessui/react";
 import { useAppSelector } from "../hooks.ts";
+import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
 
 const tabs = [
   "Hotels and Lodging",
@@ -10,13 +11,15 @@ const tabs = [
 
 const TitleCard = () => {
   const destination = useAppSelector((state) => state.trip.destination.name);
-  const from = useAppSelector(state => state.trip.from);
-  const to = useAppSelector(state => state.trip.to);
+  const from = useAppSelector((state) => state.trip.from);
+  const to = useAppSelector((state) => state.trip.to);
   return (
     <>
-      <div className="text-5xl font-semibold text-center">Trip to {destination}</div>
-      <div className="text-center mt-1 mb-2">
-          {from}-{to}
+      <div className='text-5xl font-semibold text-center'>
+        Trip to {destination}
+      </div>
+      <div className='text-center mt-1 mb-2'>
+        {from}-{to}
       </div>
     </>
   );
@@ -26,9 +29,9 @@ export const Itinerary = () => {
   return (
     <>
       <TitleCard />
-      <div className="p-1">
+      <div className='p-1'>
         <Tab.Group>
-          <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+          <Tab.List className='flex space-x-1 rounded-xl bg-blue-900/20 p-1'>
             {tabs.map((title) => (
               <Tab
                 key={title}
@@ -46,7 +49,10 @@ export const Itinerary = () => {
             ))}
           </Tab.List>
           <Tab.Panels>
-            <Tab.Panel>hotels and lodging</Tab.Panel>
+            <Tab.Panel>
+              hotels and lodging
+              <PlaceSearchBar placeType='lodging' />
+            </Tab.Panel>
             <Tab.Panel>food</Tab.Panel>
             <Tab.Panel>transportation</Tab.Panel>
             <Tab.Panel>places to visit</Tab.Panel>
