@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Tab } from "@headlessui/react";
 import { useAppSelector } from "../hooks.ts";
 import HotelAndLodging from "./HotelAndLodgingContent.tsx";
@@ -26,6 +27,7 @@ const TitleCard = () => {
 };
 
 export const Itinerary = () => {
+  const [hotels, setHotels] = useState([]);
   return (
     <>
       <TitleCard />
@@ -50,7 +52,7 @@ export const Itinerary = () => {
           </Tab.List>
           <Tab.Panels>
             <Tab.Panel>
-              <HotelAndLodging />
+              <HotelAndLodging hotels={hotels} setHotels={setHotels} />
             </Tab.Panel>
             <Tab.Panel>food</Tab.Panel>
             <Tab.Panel>transportation</Tab.Panel>

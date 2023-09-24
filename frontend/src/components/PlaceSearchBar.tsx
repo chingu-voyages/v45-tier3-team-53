@@ -1,3 +1,4 @@
+import { FunctionComponent } from "react";
 import usePlacesAutocomplete, { getGeocode } from "use-places-autocomplete";
 import { Combobox } from "@headlessui/react";
 import LatLngLiteral = google.maps.LatLngLiteral;
@@ -11,7 +12,11 @@ export interface Location {
   swBound: LatLngLiteral;
 }
 
-const Places = ({ placeType = "(regions)" }) => {
+const Places: FunctionComponent<{
+  placeType: string;
+  content: string[];
+  setContent: (content: string[]) => void;
+}> = ({ placeType = "(regions)", content, setContent }) => {
   const dispatch = useAppDispatch();
   const {
     value,
@@ -32,6 +37,9 @@ const Places = ({ placeType = "(regions)" }) => {
       swBound: result.geometry.viewport.getSouthWest().toJSON(),
     };
     dispatch(setDestination(destination));
+    if (setContent) {
+      setContent([...content, address]);
+    }
   };
 
   return (
@@ -87,8 +95,14 @@ const Places = ({ placeType = "(regions)" }) => {
   );
 };
 
-export const PlaceSearchBar = ({ placeType = "(regions)" }) => {
+export const PlaceSearchBar: FunctionComponent<{
+  placeType: string;
+  content: string[];
+  setContent: (content: string[]) => void;
+}> = ({ placeType = "(regions)", content, setContent }) => {
   const isLoaded = useAppSelector((state) => state.api.isLoaded);
   if (!isLoaded) return <div>loading...</div>;
-  return <Places placeType={placeType} />;
+  return (
+    <Places placeType={placeType} content={content} setContent={setContent} />
+  );
 };
