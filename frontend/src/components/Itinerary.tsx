@@ -1,6 +1,6 @@
 import { Tab } from "@headlessui/react";
 import { useAppSelector } from "../hooks.ts";
-import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
+import HotelAndLodging from "./HotelAndLodgingContent.tsx";
 
 const tabs = [
   "Hotels and Lodging",
@@ -50,8 +50,7 @@ export const Itinerary = () => {
           </Tab.List>
           <Tab.Panels>
             <Tab.Panel>
-              hotels and lodging
-              <PlaceSearchBar placeType='lodging' />
+              <HotelAndLodging />
             </Tab.Panel>
             <Tab.Panel>food</Tab.Panel>
             <Tab.Panel>transportation</Tab.Panel>
