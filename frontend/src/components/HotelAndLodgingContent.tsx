@@ -7,13 +7,13 @@ const HotelAndLodgingContent: FunctionComponent<{
   setHotels: (content: string[]) => void;
 }> = ({ hotels, setHotels }) => {
   return (
-    <div className='flex flex-col'>
+    <div className="flex flex-col">
       <PlaceSearchBar
-        placeType='lodging'
+        placeType="lodging"
         content={hotels}
         setContent={setHotels}
       />
-      <div className='flex flex-wrap overflow-auto h-96'>
+      <div className="flex flex-wrap overflow-auto h-96">
         {hotels &&
           hotels.map((hotel) => {
             return <ContentCard title={hotel} />;
