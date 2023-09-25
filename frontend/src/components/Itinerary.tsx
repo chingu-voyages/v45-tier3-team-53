@@ -16,10 +16,10 @@ const TitleCard = () => {
   const to = useAppSelector((state) => state.trip.to);
   return (
     <>
-      <div className='text-5xl font-semibold text-center'>
+      <div className="text-5xl font-semibold text-center">
         Trip to {destination}
       </div>
-      <div className='text-center mt-1 mb-2'>
+      <div className="text-center mt-1 mb-2">
         {from}-{to}
       </div>
     </>
@@ -31,9 +31,9 @@ export const Itinerary = () => {
   return (
     <>
       <TitleCard />
-      <div className='p-1'>
+      <div className="p-1">
         <Tab.Group>
-          <Tab.List className='flex space-x-1 rounded-xl bg-blue-900/20 p-1'>
+          <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
             {tabs.map((title) => (
               <Tab
                 key={title}
