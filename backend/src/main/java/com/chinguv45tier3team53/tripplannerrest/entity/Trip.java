@@ -38,4 +38,11 @@ public class Trip {
         }
         hotelList.add(hotel);
     }
+
+    public void addTransportation(Transportation transportation) {
+        if (transportationList == null) {
+            transportationList = new ArrayList<>();
+        }
+        transportationList.add(transportation);
+    }
 }
