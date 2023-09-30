@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Planner } from "./pages/Planner.tsx";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
+import Register from "./components/Register.tsx";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const libraries: Libraries = ["places", "maps"];
 
@@ -21,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<NewTripForm />} />
           <Route path="/planner" element={<Planner />} />
+          <Route path="/sign-up" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </Provider>

@@ -9,4 +9,8 @@ const register = (firstName, lastName, email, password) => {
         email,
         password
     });
-  };
+};
+
+export default {
+    register
+};

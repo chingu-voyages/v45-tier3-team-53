@@ -1,5 +1,5 @@
 import * as types from "./types";
-import AuthService from "../services/auth.service";
+import AuthService from "../services/authService";
 
 export const register = (firstName, lastName, email, password) => (dispatch) => {
     return AuthService.register(firstName, lastName, email, password).then(
