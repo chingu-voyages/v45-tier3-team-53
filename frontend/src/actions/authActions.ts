@@ -19,3 +19,24 @@ export const register = (firstName, lastName, email, password) => (dispatch) => 
         }
     );
 };
+
+export const login = (email, password) => (dispatch) => {
+    return AuthService.login(email, password).then(
+        (data) => {
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: { user: data },
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+
+            dispatch({
+                type: LOGIN_FAIL,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
