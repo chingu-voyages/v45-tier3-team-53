@@ -1,4 +1,4 @@
-import { GoogleMapContainer } from "../components/GoogleMapContainer.tsx";
+import { GoogleMapContainer } from '../components/GoogleMapContainer.tsx';
 
 export const Planner = () => {
   return (

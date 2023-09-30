@@ -1,9 +1,9 @@
-import { Libraries, useJsApiLoader } from "@react-google-maps/api";
-import { NewTripForm } from "./components/NewTripForm.tsx";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Planner } from "./pages/Planner.tsx";
+import { Libraries, useJsApiLoader } from '@react-google-maps/api';
+import { NewTripForm } from './components/NewTripForm.tsx';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Planner } from './pages/Planner.tsx';
 
-const libraries: Libraries = ["places", "maps"];
+const libraries: Libraries = ['places', 'maps'];
 
 function App() {
   const { isLoaded } = useJsApiLoader({
@@ -11,7 +11,7 @@ function App() {
     libraries: libraries,
   });
 
-  localStorage.setItem("isLoaded", String(isLoaded));
+  localStorage.setItem('isLoaded', String(isLoaded));
 
   return (
     <BrowserRouter>
