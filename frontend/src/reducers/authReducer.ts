@@ -20,6 +20,18 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoggedIn: false,
             };
+        case types.LOGIN_SUCCESS:
+            return {
+                ...state,
+                isLoggedIn: true,
+                user: payload.user,
+            };
+        case types.LOGIN_FAIL:
+            return {
+                ...state,
+                isLoggedIn: false,
+                user: null,
+            };
         default:
             return state;
     }
