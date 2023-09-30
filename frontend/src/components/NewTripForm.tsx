@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Dialog } from "@headlessui/react";
-import DatePicker from "react-datepicker";
-import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
-import {  useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { Dialog } from '@headlessui/react';
+import DatePicker from 'react-datepicker';
+import { PlaceSearchBar } from './PlaceSearchBar.tsx';
+import { useNavigate } from 'react-router-dom';
 
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
 export const NewTripForm = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +29,7 @@ export const NewTripForm = () => {
 
   const handleSubmit = () => {
     setIsOpen(false);
-    navigate("/planner");
+    navigate('/planner');
     // send request to back end
   };
 

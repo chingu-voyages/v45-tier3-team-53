@@ -1,12 +1,12 @@
-import { Location } from "../components/PlaceSearchBar.tsx";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Location } from '../components/PlaceSearchBar.tsx';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface TripState {
   destination: Location;
 }
 
 const defaultLocation: Location = {
-  name: "Los Angeles",
+  name: 'Los Angeles',
   coordinate: {
     lat: 34.0549076,
     lng: -118.242643,
@@ -26,7 +26,7 @@ const initialState: TripState = {
 };
 
 const tripSlice = createSlice({
-  name: "trip",
+  name: 'trip',
   initialState,
   reducers: {
     resetTrip: (state) => {

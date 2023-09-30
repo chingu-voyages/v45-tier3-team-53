@@ -1,5 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import TripReducer from "./tripReducer.ts";
+import { configureStore } from '@reduxjs/toolkit';
+import TripReducer from './tripReducer.ts';
 
 export const store = configureStore({
   reducer: {
