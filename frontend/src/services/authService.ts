@@ -15,7 +15,7 @@ const login = (email, password) => {
     return axios
         .post(API_URL + "authenticate", {
             email,
-            password,
+            password
         })
         .then((response) => {
             if (response.data.accessToken) {

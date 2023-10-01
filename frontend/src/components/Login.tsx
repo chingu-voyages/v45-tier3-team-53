@@ -32,12 +32,12 @@ const Login = (props) => {
 
     dispatch(login(email, password))
       .then(() => {
-        // window.location.reload();
+        navigate("/");
+        window.location.reload();
       })
       .catch(() => {
-        navigate("/");
-        // setLoading(false);
-        // console.log("failed");
+        setLoading(false);
+        console.log("failed");
       });
   };
 
