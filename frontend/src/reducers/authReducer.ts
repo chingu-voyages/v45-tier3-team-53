@@ -32,6 +32,12 @@ export default function (state = initialState, action) {
                 isLoggedIn: false,
                 user: null,
             };
+        case types.LOGOUT:
+            return {
+                ...state,
+                isLoggedIn: false,
+                user: null,
+            };
         default:
             return state;
     }
