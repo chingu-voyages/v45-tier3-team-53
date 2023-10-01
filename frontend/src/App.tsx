@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
 import Register from "./components/Register.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Login from "./components/Login.tsx";
 
 const libraries: Libraries = ["places", "maps"];
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<NewTripForm />} />
           <Route path="/planner" element={<Planner />} />
           <Route path="/sign-up" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </Provider>

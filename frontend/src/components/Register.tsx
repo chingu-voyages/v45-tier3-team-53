@@ -1,25 +1,16 @@
-import React, { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-// import Form from "react-validation/build/form";
-// import Input from "react-validation/build/input";
-// import CheckButton from "react-validation/build/button";
-// import isEmail from "validator";
 
 import { register } from "../actions/authActions";
 
 const Register = () => {
-  // const form = useRef(null);
-  // const checkBtn = useRef(null);
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [successful, setSuccessful] = useState(false);
 
-  // const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
 
   const onChangeEmail = (e) => {
@@ -48,8 +39,6 @@ const Register = () => {
     e.preventDefault();
 
     // setSuccessful(false);
-    // form.current.validateAll();
-    // if (checkBtn.current.context._errors.length === 0) {
     dispatch(register(firstName, lastName, email, password))
       .then(() => {
         // setSuccessful(true);
@@ -58,7 +47,6 @@ const Register = () => {
       .catch(() => {
         // setSuccessful(false);
       });
-    // }
   };
 
   return (
