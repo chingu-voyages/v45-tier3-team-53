@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Dialog } from "@headlessui/react";
 import DatePicker from "react-datepicker";
 import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
 import { useNavigate } from "react-router-dom";
+import { logout } from "./../actions/authActions";
+import { useDispatch } from "react-redux";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -11,6 +13,10 @@ export const NewTripForm = () => {
   const [fromDate, setFromDate] = useState<Date | null>(null);
   const [toDate, setToDate] = useState<Date | null>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const logOut = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -36,7 +42,7 @@ export const NewTripForm = () => {
   return (
     <>
       <button
-        onClick={() => navigate("/logout")}
+        onClick={logOut}
         className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
         Logout
