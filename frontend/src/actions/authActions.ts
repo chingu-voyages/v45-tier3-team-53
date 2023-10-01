@@ -40,3 +40,11 @@ export const login = (email, password) => (dispatch) => {
         }
     );
 };
+
+export const logout = () => (dispatch) => {
+    AuthService.logout();
+
+    dispatch({
+        type: LOGOUT,
+    });
+};
