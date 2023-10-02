@@ -1,9 +1,9 @@
-import { Dispatch, FunctionComponent, SetStateAction } from "react";
-import usePlacesAutocomplete, { getGeocode } from "use-places-autocomplete";
-import { Combobox } from "@headlessui/react";
+import { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete';
+import { Combobox } from '@headlessui/react';
 import LatLngLiteral = google.maps.LatLngLiteral;
-import { setDestination } from "../store/tripReducer.ts";
-import { useAppDispatch, useAppSelector } from "../hooks.ts";
+import { setDestination } from '../store/tripReducer.ts';
+import { useAppDispatch, useAppSelector } from '../hooks.ts';
 
 export interface Location {
   coordinate: LatLngLiteral;
@@ -16,7 +16,7 @@ const Places: FunctionComponent<{
   placeType: string;
   content: string[];
   setContent: Dispatch<SetStateAction<string[]>>;
-}> = ({ placeType = "(regions)", content, setContent }) => {
+}> = ({ placeType = '(regions)', content, setContent }) => {
   const dispatch = useAppDispatch();
   const {
     value,
@@ -75,13 +75,13 @@ const Places: FunctionComponent<{
           />
         </div>
         <Combobox.Options className="absolute w-full z-50 bg-white max-h-60 overflow-auto rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-          {status == "OK" &&
+          {status == 'OK' &&
             data.map(({ place_id, description }) => (
               <Combobox.Option
                 key={place_id}
                 className={({ active }) =>
                   `relative w-full cursor-default select-none py-2 pl-10 pr-4 ${
-                    active ? "bg-gray-200" : "text-gray-900"
+                    active ? 'bg-gray-200' : 'text-gray-900'
                   }`
                 }
                 value={description}
@@ -99,7 +99,7 @@ export const PlaceSearchBar: FunctionComponent<{
   placeType: string;
   content: string[];
   setContent: Dispatch<SetStateAction<string[]>>;
-}> = ({ placeType = "(regions)", content, setContent }) => {
+}> = ({ placeType = '(regions)', content, setContent }) => {
   const isLoaded = useAppSelector((state) => state.api.isLoaded);
   if (!isLoaded) return <div>loading...</div>;
   return (

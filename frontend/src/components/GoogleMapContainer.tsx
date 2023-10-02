@@ -1,6 +1,6 @@
-import { GoogleMap } from "@react-google-maps/api";
+import { GoogleMap } from '@react-google-maps/api';
 import LatLngBoundsLiteral = google.maps.LatLngBoundsLiteral;
-import { useAppSelector } from "../hooks.ts";
+import { useAppSelector } from '../hooks.ts';
 
 export const GoogleMapContainer = () => {
   const isLoaded = useAppSelector((state) => state.api.isLoaded);
@@ -26,8 +26,8 @@ const Map = () => {
     map.fitBounds(bounds);
   };
   const containerStyle = {
-    width: "100%",
-    height: "100vh",
+    width: '100%',
+    height: '100vh',
   };
   return (
     <GoogleMap

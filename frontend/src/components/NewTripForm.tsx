@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { Dialog } from "@headlessui/react";
-import DatePicker from "react-datepicker";
-import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../hooks.ts";
-import { setDates } from "../store/tripReducer.ts";
-import { formatDateMMDDYY } from "../utils.ts";
+import { useState } from 'react';
+import { Dialog } from '@headlessui/react';
+import DatePicker from 'react-datepicker';
+import { PlaceSearchBar } from './PlaceSearchBar.tsx';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../hooks.ts';
+import { setDates } from '../store/tripReducer.ts';
+import { formatDateMMDDYY } from '../utils.ts';
 
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
 export const NewTripForm = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ export const NewTripForm = () => {
         to: formatDateMMDDYY(toDate),
       }),
     );
-    navigate("/planner");
+    navigate('/planner');
     // send request to back end
   };
 
