@@ -27,7 +27,7 @@ const TitleCard = () => {
 };
 
 export const Itinerary = () => {
-  const [hotels, setHotels] = useState([]);
+  const [hotels, setHotels] = useState<string[]>([]);
   return (
     <>
       <TitleCard />

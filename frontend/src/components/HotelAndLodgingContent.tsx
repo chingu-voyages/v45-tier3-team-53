@@ -1,10 +1,10 @@
-import { FunctionComponent } from "react";
+import { Dispatch, FunctionComponent, SetStateAction } from "react";
 import { PlaceSearchBar } from "./PlaceSearchBar.tsx";
 import ContentCard from "./ContentCard.tsx";
 
 const HotelAndLodgingContent: FunctionComponent<{
   hotels: string[];
-  setHotels: (content: string[]) => void;
+  setHotels: Dispatch<SetStateAction<string[]>>;
 }> = ({ hotels, setHotels }) => {
   return (
     <div className="flex flex-col">
