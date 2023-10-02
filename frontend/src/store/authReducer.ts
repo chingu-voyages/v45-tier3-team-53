@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axiosInstance from "../utils/axiosInstance";
 
 interface AuthState {
     token: string | null;
@@ -12,6 +13,18 @@ const initialState: AuthState = {
     error: null,
 }
 
+interface RegisterData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}
+
+export const registerUser = createAsyncThunk("auth/registerUser", async (registerData: RegisterData) => {
+    const response = await axiosInstance.post("/auth/register", registerData);
+    return response.data;
+})
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -19,6 +32,11 @@ const authSlice = createSlice({
         logout: (state) => {
             state = initialState;
         },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(registerUser.fulfilled, (state, action) => {
+            state.token = action.payload.token;
+        })
     }
 })
 

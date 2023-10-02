@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { registerUser } from "./authReducer";
 
 interface User {
     firstName: string;
@@ -24,6 +25,11 @@ const userSlice = createSlice({
         logoutUser: (state) => {
             state.user = null;
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(registerUser.fulfilled, (state, action) => {
+            state.user = action.payload.user;
+        })
     }
 });
 
