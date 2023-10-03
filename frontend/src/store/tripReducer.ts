@@ -3,6 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface TripState {
   destination: Location;
+  from: string;
+  to: string;
+}
+
+interface DatesEntry {
+  from: string;
+  to: string;
 }
 
 const defaultLocation: Location = {
@@ -23,6 +30,8 @@ const defaultLocation: Location = {
 
 const initialState: TripState = {
   destination: defaultLocation,
+  from: '',
+  to: '',
 };
 
 const tripSlice = createSlice({
@@ -34,10 +43,13 @@ const tripSlice = createSlice({
     },
     setDestination: (state, action: PayloadAction<Location>) => {
       state.destination = action.payload;
-      console.log(state.destination);
+    },
+    setDates: (state, action: PayloadAction<DatesEntry>) => {
+      state.from = action.payload.from;
+      state.to = action.payload.to;
     },
   },
 });
 
-export const { resetTrip, setDestination } = tripSlice.actions;
+export const { resetTrip, setDestination, setDates } = tripSlice.actions;
 export default tripSlice.reducer;

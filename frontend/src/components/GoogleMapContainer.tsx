@@ -3,7 +3,8 @@ import LatLngBoundsLiteral = google.maps.LatLngBoundsLiteral;
 import { useAppSelector } from '../hooks.ts';
 
 export const GoogleMapContainer = () => {
-  if (localStorage.getItem('isLoaded') === 'false') {
+  const isLoaded = useAppSelector((state) => state.api.isLoaded);
+  if (!isLoaded) {
     return <div>loading...</div>;
   }
   return <Map />;
@@ -33,6 +34,7 @@ const Map = () => {
       center={start}
       mapContainerStyle={containerStyle}
       onLoad={onLoad}
+      zoom={12}
     >
       <></>
     </GoogleMap>
