@@ -1,9 +1,9 @@
-import { GoogleMap } from "@react-google-maps/api";
+import { GoogleMap } from '@react-google-maps/api';
 import LatLngBoundsLiteral = google.maps.LatLngBoundsLiteral;
-import { useAppSelector } from "../hooks.ts";
+import { useAppSelector } from '../hooks.ts';
 
 export const GoogleMapContainer = () => {
-  if (localStorage.getItem("isLoaded") === "false") {
+  if (localStorage.getItem('isLoaded') === 'false') {
     return <div>loading...</div>;
   }
   return <Map />;
@@ -25,8 +25,8 @@ const Map = () => {
     map.fitBounds(bounds);
   };
   const containerStyle = {
-    width: "100%",
-    height: "100vh",
+    width: '100%',
+    height: '100vh',
   };
   return (
     <GoogleMap
