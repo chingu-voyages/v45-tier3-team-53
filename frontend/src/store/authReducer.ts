@@ -22,21 +22,20 @@ interface RegisterData {
 
 export const registerUser = createAsyncThunk("auth/registerUser", async (registerData: RegisterData) => {
     const response = await axiosInstance.post("/auth/register", registerData);
+    localStorage.setItem("user", JSON.stringify(response.data));
+    localStorage.removeItem("user");
     return response.data;
 })
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState = false,
+    initialState,
     reducers: {
-        register: (state) => {
-            state = true;
-        },
         login: (state) => {
-            state = true;
+            state.status = "success";
         },
         logout: (state) => {
-            state = false;
+            state = initialState;
         },
     },
     extraReducers: (builder) => {
