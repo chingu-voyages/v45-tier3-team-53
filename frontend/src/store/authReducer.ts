@@ -1,17 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../utils/axiosInstance";
 
-interface AuthState {
-    token: string | null;
-    status: "idle" | "loading" | "succeeded" | "failed";
-    error: string | null;
-}
+// interface AuthState {
+//     token: string | null;
+//     status: "idle" | "loading" | "succeeded" | "failed";
+//     error: string | null;
+// }
 
-const initialState: AuthState = {
-    token: null,
-    status: "idle",
-    error: null,
-}
+// const initialState: AuthState = {
+//     token: null,
+//     status: "idle",
+//     error: null,
+// }
 
 interface RegisterData {
     email: string;
@@ -37,30 +37,30 @@ export const loginUser = createAsyncThunk("auth/loginUser", async (loginData: Lo
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState,
-    reducers: {
-        login: (state, action) => {
-            state.token = action.payload;
-        },
-        logout: (state) => {
-            state = initialState;
-        },
+    initialState: {
+        isLoggedIn: false
     },
-    extraReducers(builder) {
-        builder
-            .addCase(registerUser.pending, (state, action) => {
-                state.status = 'loading';
-            })
-            .addCase(registerUser.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.token = action.payload.token;
-            })
-            .addCase(registerUser.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.error.message;
-            })
-    }
+    reducers: {
+        loginConfirm: (state) => {
+            state.isLoggedIn = true;
+        },
+        logoutConfirm: (state) => {
+            state.isLoggedIn = false;
+        },
+        logout: () => {
+
+        },
+        confirm: () => {
+
+        }
+    },
+    // extraReducers(builder) {
+    //     builder
+    //         .addCase(registerUser.pending, (state, action) => {
+    //             state.status = 'loading';
+    //         })
+    // }
 })
 
-export const { login, logout } = authSlice.actions;
+export const { loginConfirm, logoutConfirm, logout, confirm } = authSlice.actions;
 export default authSlice.reducer;

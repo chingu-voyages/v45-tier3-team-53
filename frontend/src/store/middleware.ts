@@ -1,5 +1,5 @@
 import { createListenerMiddleware, isAsyncThunkAction } from "@reduxjs/toolkit";
-import { registerUser, loginUser, logout } from "./authReducer";
+import { registerUser, loginUser, logout, loginConfirm, logoutConfirm, confirm } from "./authReducer";
 
 export const listenerMiddleware = createListenerMiddleware();
 
@@ -16,4 +16,15 @@ listenerMiddleware.startListening({
     actionCreator: logout,
     effect: () =>
         localStorage.removeItem("token")
+});
+
+listenerMiddleware.startListening({
+    actionCreator: confirm,
+    effect: (action, listenerApi) => {
+        if (localStorage.getItem("token") != null) {
+            listenerApi.dispatch(loginConfirm);
+        } else {
+            listenerApi.dispatch(logoutConfirm);
+        }
+    }
 });
