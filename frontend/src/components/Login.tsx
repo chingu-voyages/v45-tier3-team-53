@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { useNavigate } from 'react-router-dom';
+import { login, loginUser } from '../store/authReducer';
 
 const Login = (props) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const auth = useAppSelector((state) => state.auth);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onChangeEmail = (e) => {
     const email = e.target.value;
@@ -23,23 +24,23 @@ const Login = (props) => {
     setPassword(password);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     setLoading(true);
 
-    dispatch(login(email, password))
-      .then(() => {
-        navigate('/');
-        window.location.reload();
-      })
-      .catch(() => {
-        setLoading(false);
-        console.log('failed');
-      });
+    try {
+      const newToken = await dispatch(loginUser({ email, password }));
+      dispatch(login(JSON.stringify(newToken)));
+      navigate('/');
+      window.location.reload();
+    } catch (error) {
+      setLoading(false);
+      console.log('failed');
+    }
   };
 
-  if (isLoggedIn) {
+  if (auth.token != null) {
     navigate('/');
   }
 

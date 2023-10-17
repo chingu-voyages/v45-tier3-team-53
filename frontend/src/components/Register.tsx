@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { register } from "../actions/authActions";
+// import { register } from "../actions/authActions";
 
 const Register = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   // const [successful, setSuccessful] = useState(false);
 
   const dispatch = useDispatch();
@@ -36,17 +36,16 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
-    e.preventDefault();
-
-    // setSuccessful(false);
-    dispatch(register(firstName, lastName, email, password))
-      .then(() => {
-        // setSuccessful(true);
-        navigate("/");
-      })
-      .catch(() => {
-        // setSuccessful(false);
-      });
+    // e.preventDefault();
+    // // setSuccessful(false);
+    // dispatch(register(firstName, lastName, email, password))
+    //   .then(() => {
+    //     // setSuccessful(true);
+    //     navigate("/");
+    //   })
+    //   .catch(() => {
+    //     // setSuccessful(false);
+    //   });
   };
 
   return (

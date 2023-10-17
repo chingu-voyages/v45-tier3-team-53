@@ -3,7 +3,7 @@ import axiosInstance from "../utils/axiosInstance";
 
 interface AuthState {
     token: string | null;
-    status: "idle" | "loading" | "success" | "failed";
+    status: "idle" | "loading" | "succeeded" | "failed";
     error: string | null;
 }
 
@@ -20,10 +20,18 @@ interface RegisterData {
     password: string;
 }
 
+interface LoginData {
+    email: string;
+    password: string;
+}
+
 export const registerUser = createAsyncThunk("auth/registerUser", async (registerData: RegisterData) => {
     const response = await axiosInstance.post("/auth/register", registerData);
-    localStorage.setItem("user", JSON.stringify(response.data));
-    localStorage.removeItem("user");
+    return response.data;
+})
+
+export const loginUser = createAsyncThunk("auth/loginUser", async (loginData: LoginData) => {
+    const response = await axiosInstance.post("/auth/authenticate", loginData);
     return response.data;
 })
 
@@ -31,19 +39,28 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        login: (state) => {
-            state.status = "success";
+        login: (state, action) => {
+            state.token = action.payload;
         },
         logout: (state) => {
             state = initialState;
         },
     },
-    extraReducers: (builder) => {
-        builder.addCase(registerUser.fulfilled, (state, action) => {
-            state.token = action.payload.token;
-        })
+    extraReducers(builder) {
+        builder
+            .addCase(registerUser.pending, (state, action) => {
+                state.status = 'loading';
+            })
+            .addCase(registerUser.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.token = action.payload.token;
+            })
+            .addCase(registerUser.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
     }
 })
 
-export const { logout } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 export default authSlice.reducer;
