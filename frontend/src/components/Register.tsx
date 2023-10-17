@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../hooks';
 import { useNavigate } from 'react-router-dom';
-
-// import { register } from "../actions/authActions";
+import { registerUser } from '../store/authReducer';
 
 const Register = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [successful, setSuccessful] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onChangeEmail = (e) => {
     const email = e.target.value;
@@ -35,17 +33,18 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
-    // e.preventDefault();
-    // // setSuccessful(false);
-    // dispatch(register(firstName, lastName, email, password))
-    //   .then(() => {
-    //     // setSuccessful(true);
-    //     navigate("/");
-    //   })
-    //   .catch(() => {
-    //     // setSuccessful(false);
-    //   });
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    try {
+      const newToken = await dispatch(
+        registerUser({ email, password, firstName, lastName }),
+      );
+      console.log(newToken);
+      navigate('/');
+    } catch (error) {
+      console.log('failed');
+    }
   };
 
   return (

@@ -14,10 +14,10 @@ const initialState: AuthState = {
 }
 
 interface RegisterData {
-    firstName: string;
-    lastName: string;
     email: string;
     password: string;
+    firstName: string;
+    lastName: string;
 }
 
 interface LoginData {
