@@ -31,7 +31,8 @@ const Login = (props) => {
 
     try {
       const newToken = await dispatch(loginUser({ email, password }));
-      dispatch(login(JSON.stringify(newToken)));
+      // dispatch(login(JSON.stringify(newToken)));
+      console.log(newToken);
       navigate('/');
       window.location.reload();
     } catch (error) {
