@@ -1,10 +1,7 @@
-import axios from "axios";
-import authHeader from "./authHeader";
-
-const API_URL = "http://localhost:8080/api/";
+import axiosInstance from "../utils/axiosInstance";
 
 const getAllTrips = () => {
-    return axios.get(API_URL + "trips", { headers: authHeader() });
+    // axiosInstance.get();
 };
 
 export default {
